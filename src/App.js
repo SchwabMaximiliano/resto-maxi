@@ -14,9 +14,7 @@ import { NotFound } from "./components/NotFound";
 function App() {
   return (
       <BrowserRouter>
-      
         <Routes>
-        
           <Route name="navbar" exact path="/" element={<NavBar />}>
             <Route name="navbar" exact path="/" element={<UncontrolledCarousel />}/>
             <Route name="home" exact path="home" element={<Home />} />

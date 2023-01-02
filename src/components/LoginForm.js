@@ -13,7 +13,7 @@ import { REGEX } from "../settings";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { JSEncrypt } from "jsencrypt";
+import JSEncrypt from 'jsencrypt';
 //import { useInitialContext } from "../helper/InitialContext";
 
 export const LoginForm = () => {
@@ -33,25 +33,23 @@ export const LoginForm = () => {
         .then((response) => setPublicKey(response.data));
 
   }, []);
-
   console.log(publicKey);
 
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+    // Encryption
     const encrypt = new JSEncrypt();
     // Assign our encryptor to utilize the public key.
     encrypt.setPublicKey(publicKey);
-    // Perform our encryption based on our public key - only private key can read it!
     const userEncrypted = encrypt.encrypt(data.user);
     const passwordEncrypted = encrypt.encrypt(data.password);
     const encryptedData = { user: userEncrypted, password: passwordEncrypted };
-    console.log(encryptedData);
-    console.log(data);
 
+    var base=process.env.DB_HOST||"http://localhost";
     //post to backend
     await axios
-      .post("http://localhost:4000/api/user/login", encryptedData)
+      .post(`${base}:4000/api/user/login`, encryptedData)
       .then((response) => {
         console.log(response.status);
         if (response.status === 200) {

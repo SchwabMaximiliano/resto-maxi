@@ -4,30 +4,20 @@ import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import { useNavigate } from "react-router-dom";
 import { ErrorMessage } from "@hookform/error-message";
-import { useForm,} from "react-hook-form";
+import { useForm} from "react-hook-form";
 import { REGEX } from "../settings";
-import {
-  Button,
-  Form,
-  FormControl,
-  FormGroup,
-  FormLabel,
-} from "react-bootstrap";
+import { Button, Form, FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Autosuggest from 'react-autosuggest';
 
 export const RegisterForm = () => {
-    /*
-    en register tambien debo encryptar usuario y contraseña?
-    en el campo mail no me lo toma si escribo el mail a mano
-
-    //guardar datos del usuario en local storage antes del navigate(user) response.data
-     */
+   
   const navigate = useNavigate();
   const { register, formState: { errors }, handleSubmit } = useForm();
   const [ gender,setGender] = useState('');
 
+  // autosuggest
   const customEmails = ['gmail.com' , 'hotmail.com', 'yahoo.com'];
   const[emails, setEmails]= useState(customEmails);
   const[value, setValue]= useState("");
@@ -81,14 +71,14 @@ export const RegisterForm = () => {
   value,
   onChange
   }
+  // --
 
   const onSubmit = async (data) => {
     data.gender=gender;
-    data.email=emailSeleted;
+    data.email=value;
     data.emailState="not verified";
     data.phoneState="not verified";
-    console.log(data)
-    /*
+    
     await axios
       .post("http://localhost:4000/api/user/register", data) 
       .then((response) => {
@@ -96,6 +86,8 @@ export const RegisterForm = () => {
         if (response.status === 201) {
           console.log(response);
           Swal.fire("Usuario registrado", "Bienvenido.. te enviamos un link para validar tu correo", "success");
+          data.password="";
+          localStorage.setItem("userData", JSON.stringify(data));
           navigate("/user");
         } else {
           Swal.fire("Error!", "Datos invalidos", "error");
@@ -104,8 +96,6 @@ export const RegisterForm = () => {
       .catch(function(error) {
         console.log(error);
       }); 
-      */
-          
   };
 
   return (
@@ -211,7 +201,7 @@ export const RegisterForm = () => {
               })}
             />
             <small className="text-danger"><ErrorMessage errors={errors} name="phone" /></small> <br/>
-            <a href="https://www.argentina.gob.ar/pais/codigo-telefonia" target="_blank">Consulta aqui los códigos de área</a>
+            <a href="https://www.argentina.gob.ar/pais/codigo-telefonia" target="_blank" rel="noreferrer">Consulta aqui los códigos de área</a>
           </FormGroup>
 
           <FormGroup className="mb-2">
@@ -225,7 +215,6 @@ export const RegisterForm = () => {
               renderSuggestion={renderSuggestion}
               inputProps={inputProps}
             />
-            <button className="btn btn-primary" onClick={()=>{ console.log(emailSeleted)}}>Probar</button>
           </FormGroup>
 
           <FormGroup className="mb-2">
