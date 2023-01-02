@@ -73,6 +73,8 @@ export const RegisterForm = () => {
   }
   // --
 
+  var base=process.env.DB_HOST||"http://localhost:4000";
+
   const onSubmit = async (data) => {
     data.gender=gender;
     data.email=value;
@@ -80,7 +82,7 @@ export const RegisterForm = () => {
     data.phoneState="not verified";
     
     await axios
-      .post("http://localhost:4000/api/user/register", data) 
+      .post(`${base}/api/user/register`, data) 
       .then((response) => {
         console.log(response.status);
         if (response.status === 201) {

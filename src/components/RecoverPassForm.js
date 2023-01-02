@@ -71,13 +71,15 @@ export const RecoverPassForm = () => {
   }
   // --
 
+  var base=process.env.DB_HOST||"http://localhost:4000";
+
   const onSubmit = async (data) => {
     data.email=value;
     console.log(data);
 
     /*
     await axios
-      .post("http://localhost:4000/api/user/register", data) 
+      .post(`${base}/api/user/register`, data) 
       .then((response) => {
         console.log(response.status);
         if (response.status === 201) {

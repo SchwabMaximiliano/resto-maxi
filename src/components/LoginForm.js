@@ -26,10 +26,11 @@ export const LoginForm = () => {
   } = useForm();
 
   const [publicKey, setPublicKey] = useState("");
+  var base=process.env.DB_HOST||"http://localhost:4000";
 
   useEffect(() => {
     axios
-        .get("http://localhost:4000/")
+        .get(`${base}/`)
         .then((response) => setPublicKey(response.data));
 
   }, []);
@@ -46,10 +47,9 @@ export const LoginForm = () => {
     const passwordEncrypted = encrypt.encrypt(data.password);
     const encryptedData = { user: userEncrypted, password: passwordEncrypted };
 
-    var base=process.env.DB_HOST||"http://localhost";
     //post to backend
     await axios
-      .post(`${base}:4000/api/user/login`, encryptedData)
+      .post(`${base}/api/user/login`, encryptedData)
       .then((response) => {
         console.log(response.status);
         if (response.status === 200) {
