@@ -33,7 +33,6 @@ export const LoginForm = () => {
         .then((response) => setPublicKey(response.data));
   }, []);
   
-
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
