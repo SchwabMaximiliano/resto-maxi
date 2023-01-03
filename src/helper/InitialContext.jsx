@@ -10,9 +10,13 @@ export function useInitialContext() {
 export function Initialcontext({ children }) {
 
     const [publicKey, setPublicKey] = useState("");
+    var base = process.env.DB_HOST || "http://localhost:4000";
 
-    axios.get("http://localhost:4000/")
-        .then((response) => setPublicKey(response.data));
+    useEffect(() => {
+        axios
+            .get(`${base}/api/user/publicKey`)
+            .then((response) => setPublicKey(response.data));
+    }, []);
 
     console.log(publicKey);
 

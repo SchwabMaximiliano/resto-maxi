@@ -18,7 +18,6 @@ import JSEncrypt from 'jsencrypt';
 
 export const LoginForm = () => {
   
-  //ver como hacer para que tome las llaves de los archivos
   const {
     register,
     formState: { errors },
@@ -30,11 +29,10 @@ export const LoginForm = () => {
 
   useEffect(() => {
     axios
-        .get(`${base}/`)
+        .get(`${base}/api/user/publicKey`)
         .then((response) => setPublicKey(response.data));
-
   }, []);
-  console.log(publicKey);
+  
 
   const navigate = useNavigate();
 

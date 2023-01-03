@@ -11,6 +11,7 @@ export const RecoverPassForm = () => {
 
   /* 
   ver herramienta para recuperar cuenta
+  falta enviar mensaje para recuperar y crear el endpoint
   */
   const { handleSubmit } = useForm();
   const navigate = useNavigate();
