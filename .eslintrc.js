@@ -10,7 +10,6 @@ module.exports = {
           "react/no-unescaped-entities": "off",
           "react/display-name": "off",
           "react/prop-types": "off",
-          "react/no-unused-vars": "off",
         }
       }
     ]

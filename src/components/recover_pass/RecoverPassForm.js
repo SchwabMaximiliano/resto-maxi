@@ -1,20 +1,22 @@
 import React, {useEffect, useState} from "react";
-import "./styles.css";
+import '../styles.css';
 import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import Autosuggest from 'react-autosuggest';
+/*
 import axios from "axios";
 import Swal from "sweetalert2";
-import Autosuggest from 'react-autosuggest';
+import { bff } from '../../config';
+*/
 
 export const RecoverPassForm = () => {
-
   /* 
   ver herramienta para recuperar cuenta
   falta enviar mensaje para recuperar y crear el endpoint
   */
+
   const { handleSubmit } = useForm();
-  const navigate = useNavigate();
 
   // Autosugest
   const customEmails = ['gmail.com' , 'hotmail.com', 'yahoo.com'];
@@ -72,7 +74,11 @@ export const RecoverPassForm = () => {
   }
   // --
 
-  var base=process.env.DB_HOST||"http://localhost:4000";
+  const navigate = useNavigate();
+  
+  const handleNavigation = (route) => {
+    navigate(route)
+  }
 
   const onSubmit = async (data) => {
     data.email=value;
@@ -80,7 +86,7 @@ export const RecoverPassForm = () => {
 
     /*
     await axios
-      .post(`${base}/api/user/register`, data) 
+      .post(`${bff}/api/user/register`, data) 
       .then((response) => {
         console.log(response.status);
         if (response.status === 201) {
@@ -117,10 +123,9 @@ export const RecoverPassForm = () => {
               Ingrese su Email para recuperar la password
             </Form.Text>
           </Form.Group>
+
           <Button variant="success mt-2" type="submit">Recuperar</Button>{' '}
-          <a href="/">
-            <Button variant="primary mt-2">Inicio</Button>
-          </a>
+          <Button variant="primary mt-2" onClick={()=>{handleNavigation('/')}} >Inicio</Button>
         </Form>
       </div>
     </div>

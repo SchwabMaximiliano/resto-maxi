@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import "./styles.css";
+import React from "react";
+import "../styles.css";
 import {
   Button,
   Form,
@@ -9,12 +9,13 @@ import {
 } from "react-bootstrap";
 import { ErrorMessage } from "@hookform/error-message";
 import { useForm } from "react-hook-form";
-import { REGEX } from "../settings";
+import { REGEX } from "../../settings";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import JSEncrypt from 'jsencrypt';
-//import { useInitialContext } from "../helper/InitialContext";
+import { bff } from '../../config';  
+import { useInitialContext } from "../../helper/InitialContext";
 
 export const LoginForm = () => {
   
@@ -23,17 +24,8 @@ export const LoginForm = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-
-  const [publicKey, setPublicKey] = useState("");
-  var base=process.env.DB_HOST||"http://localhost:4000";
-
-  useEffect(() => {
-    axios
-        .get(`${base}/api/user/publicKey`)
-        .then((response) => setPublicKey(response.data));
-  }, []);
-  
   const navigate = useNavigate();
+  const publicKey = useInitialContext();
 
   const onSubmit = async (data) => {
     // Encryption
@@ -46,7 +38,7 @@ export const LoginForm = () => {
 
     //post to backend
     await axios
-      .post(`${base}/api/user/login`, encryptedData)
+      .post(`${bff}/api/user/login`, encryptedData)
       .then((response) => {
         console.log(response.status);
         if (response.status === 200) {
@@ -60,6 +52,10 @@ export const LoginForm = () => {
         console.log(error);
       });
   };
+
+  const handleNavigation = (route) => {
+    navigate(route)
+  }
 
   return (
     <div className="wrapper bg-dark d-flex align-items-center justify-content-center w-100">
@@ -123,12 +119,10 @@ export const LoginForm = () => {
           </Button>
         </Form>
 
-        <a href="register">
-          <Button variant="link">Registrarme</Button>
-        </a>
-        <a href="/recoverpass">
-          <Button variant="link">Olvidé mi password</Button>
-        </a>
+          <Button onClick={()=>{handleNavigation('/register')}} variant="link">Registrarme</Button>
+
+          <Button onClick={()=>{handleNavigation('/recoverpass')}} variant="link">Olvidé mi password</Button>
+        
       </div>
     </div>
   );

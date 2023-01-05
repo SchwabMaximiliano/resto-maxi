@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from "react";
-import "./styles.css";
+import "../styles.css";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import { useNavigate } from "react-router-dom";
 import { ErrorMessage } from "@hookform/error-message";
 import { useForm} from "react-hook-form";
-import { REGEX } from "../settings";
+import { REGEX } from "../../settings";
 import { Button, Form, FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Autosuggest from 'react-autosuggest';
+import { bff } from '../../config';
 
 export const RegisterForm = () => {
    
@@ -35,7 +36,7 @@ export const RegisterForm = () => {
     }
     const substring = value.substring(index+1, value.length);
     const filtered = customEmails.filter((email)=> email.includes(substring));
-    return filtered[0] === substring? [] : filtered;
+    return filtered[0] === substring ? [] : filtered;
   }
   
   const onSuggestionsClearRequested = () =>{
@@ -73,16 +74,15 @@ export const RegisterForm = () => {
   }
   // --
 
-  var base=process.env.DB_HOST||"http://localhost:4000";
-
   const onSubmit = async (data) => {
-    data.gender=gender;
-    data.email=value;
-    data.emailState="not verified";
-    data.phoneState="not verified";
-    
     await axios
-      .post(`${base}/api/user/register`, data) 
+      .post(`${bff}/api/user/register`, {
+        ...data,
+        gender,
+        email: value,
+        emailState: 'not verified',
+        phoneState: 'not verified',
+      }) 
       .then((response) => {
         console.log(response.status);
         if (response.status === 201) {

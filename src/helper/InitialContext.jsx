@@ -1,5 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { bff } from '../config';
 
 const initialContext = React.createContext();
 
@@ -10,15 +11,12 @@ export function useInitialContext() {
 export function Initialcontext({ children }) {
 
     const [publicKey, setPublicKey] = useState("");
-    var base = process.env.DB_HOST || "http://localhost:4000";
 
     useEffect(() => {
         axios
-            .get(`${base}/api/user/publicKey`)
+            .get(`${bff}/api/user/publicKey`)
             .then((response) => setPublicKey(response.data));
     }, []);
-
-    console.log(publicKey);
 
     return (
         <initialContext.Provider value={publicKey}>
