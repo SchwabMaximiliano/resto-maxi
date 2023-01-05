@@ -2,7 +2,8 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LoginForm } from "./components/login/LoginForm";
 import { RegisterForm } from "./components/register/RegisterForm";
-import { RecoverPassForm } from "./components//recover_pass/RecoverPassForm";
+import { RecoverPassForm } from "./components/recover_pass/RecoverPassForm";
+import { PassForm } from "./components/recover_pass/PassForm";
 import { Home } from "./components/home/Home";
 import { User } from "./components/user/User";
 import { NavBar } from "./components/navbar/NavBar";
@@ -23,6 +24,7 @@ function App() {
               <Route name="login" exact path="login" element={<LoginForm />} />
               <Route name="register" exact path="register" element={<RegisterForm />} />
               <Route name="recoverpass" exact path="recoverpass" element={<RecoverPassForm />} />
+              <Route name="recoverpass-enterpass" exact path="recoverpass-enterpass/:user" element={<PassForm />} />
               <Route name="user" exact path="user" element={<User />} />
               <Route name="email-confirmed" exact path="/email-confirmed" element={<EmailConfirmed />} />
               <Route name="email-error" exact path="/email-error" element={<EmailError />} />

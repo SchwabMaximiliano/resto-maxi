@@ -4,18 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import Autosuggest from 'react-autosuggest';
-/*
 import axios from "axios";
 import Swal from "sweetalert2";
 import { bff } from '../../config';
-*/
 
 export const RecoverPassForm = () => {
-  /* 
-  ver herramienta para recuperar cuenta
-  falta enviar mensaje para recuperar y crear el endpoint
-  */
-
+  
   const { handleSubmit } = useForm();
 
   // Autosugest
@@ -84,16 +78,13 @@ export const RecoverPassForm = () => {
     data.email=value;
     console.log(data);
 
-    /*
     await axios
-      .post(`${bff}/api/user/register`, data) 
+      .post(`${bff}/api/user/recover-pass`, data) 
       .then((response) => {
         console.log(response.status);
-        if (response.status === 201) {
+        if (response.status === 200) {
           console.log(response);
-          Swal.fire("recuperacion en proceso", "Te enviamos un link para recuperar tu correo", "success");
-          localStorage.setItem("userData", JSON.stringify(data));
-          navigate("/user");
+          Swal.fire("recuperacion en proceso", "Te enviamos un link para recuperar tu contraseña", "success");
         } else {
           Swal.fire("Error!", "Datos invalidos", "error");
         }
@@ -101,7 +92,7 @@ export const RecoverPassForm = () => {
       .catch(function(error) {
         console.log(error);
       }); 
-      */
+      
   };
 
   return (
