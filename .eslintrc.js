@@ -1,16 +1,21 @@
 module.exports = {
-    "extends": ["react-app"],
-    "rules": {
-    },
-    "overrides": [
-      {
-        "files": ["**/*.js?(x)"],
-        "rules": {
-  // ******** add ignore rules here *********
-          "react/no-unescaped-entities": "off",
-          "react/display-name": "off",
-          "react/prop-types": "off",
-        }
-      }
-    ]
-  }
+	env: {
+		browser: true,
+		es2021: true,
+	},
+	settings: {
+		react: {
+			version: 'detect',
+		},
+	},
+	extends: ['plugin:react/recommended', 'standard', 'eslint-config-prettier'],
+	parserOptions: {
+		ecmaFeatures: {
+			jsx: true,
+		},
+		ecmaVersion: 12,
+		sourceType: 'module',
+	},
+	plugins: ['react'],
+	rules: {},
+};

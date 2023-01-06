@@ -1,1 +1,1 @@
-export const bff = 'http://localhost:4000'
+export const bff = 'http://localhost:4000';

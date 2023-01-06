@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 
 export const User = () => {
-  const userData=JSON.parse(localStorage.getItem("userData"));
-  return (
-    <div>
-        <h1>Hola {userData.name}</h1>
-    </div>
-  )
-}
+	const userData = JSON.parse(localStorage.getItem('userData'));
+	return (
+		<div>
+			<h1>Hola {userData.name}</h1>
+		</div>
+	);
+};
