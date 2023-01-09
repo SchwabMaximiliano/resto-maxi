@@ -11,16 +11,17 @@ import { EmailConfirmed } from './components/email/EmailConfirmed';
 import { EmailError } from './components/email/EmailError';
 import { UncontrolledCarousel } from './components/carousel/Corousel';
 import { NotFound } from './components/not_found/NotFound';
-import { Initialcontext } from './helper/InitialContext';
+import { InitialContext } from './helper/InitialContext';
+import { Dashboard } from './components/dashboard/Dashboard';
 
 function App() {
 	return (
-		<Initialcontext>
+		<InitialContext>
 			<BrowserRouter>
 				<Routes>
 					<Route name='navbar' exact path='/' element={<NavBar />}>
 						<Route
-							name='navbar'
+							name='carousel'
 							exact
 							path='/'
 							element={<UncontrolledCarousel />}
@@ -53,6 +54,12 @@ function App() {
 							element={<EmailConfirmed />}
 						/>
 						<Route
+							name='dashboard'
+							exact
+							path='/dashboard'
+							element={<Dashboard />}
+						/>
+						<Route
 							name='email-error'
 							exact
 							path='/email-error'
@@ -62,7 +69,7 @@ function App() {
 					</Route>
 				</Routes>
 			</BrowserRouter>
-		</Initialcontext>
+		</InitialContext>
 	);
 }
 

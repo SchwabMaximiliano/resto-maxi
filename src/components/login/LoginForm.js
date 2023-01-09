@@ -5,11 +5,11 @@ import { useForm } from 'react-hook-form';
 import { REGEX } from '../../settings';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
 import JSEncrypt from 'jsencrypt';
 import { bff } from '../../config';
-import { useInitialContext } from '../../helper/InitialContext';
+import { useInitialContext, useUserContext } from '../../helper/InitialContext';
 import { CustomInput } from '../components/form_group/CustomInput';
+import { useNavigate, Link } from 'react-router-dom';
 
 export const LoginForm = () => {
 	const {
@@ -19,7 +19,10 @@ export const LoginForm = () => {
 	} = useForm();
 	const navigate = useNavigate();
 	const publicKey = useInitialContext();
-
+	const handleNavigation = route => {
+		navigate(route);
+	};
+	const { logIn } = useUserContext();
 	const onSubmit = async data => {
 		// Encryption
 		const encrypt = new JSEncrypt();
@@ -28,8 +31,12 @@ export const LoginForm = () => {
 		const userEncrypted = encrypt.encrypt(data.user);
 		const passwordEncrypted = encrypt.encrypt(data.password);
 		const encryptedData = { user: userEncrypted, password: passwordEncrypted };
-		console.log(data);
+		data.name = 'nombre1';
+
+		logIn(data);
+		handleNavigation('/dashboard');
 		// post to backend
+		/*
 		await axios
 			.post(`${bff}/api/user/login`, encryptedData)
 			.then(response => {
@@ -37,7 +44,7 @@ export const LoginForm = () => {
 				if (response.status === 200) {
 					console.log(response);
 					localStorage.setItem('userData', JSON.stringify(response.data));
-					navigate('/home');
+					handleNavigation('/dashboard');
 				}
 				if (response.status === 401) {
 					Swal.fire('Error!', 'Datos invalidos', 'error');
@@ -48,10 +55,7 @@ export const LoginForm = () => {
 			.catch(function (error) {
 				console.log(error);
 			});
-	};
-
-	const handleNavigation = route => {
-		navigate(route);
+			*/
 	};
 
 	return (
@@ -88,21 +92,11 @@ export const LoginForm = () => {
 					</Button>
 				</Form>
 
-				<Button
-					onClick={() => {
-						handleNavigation('/register');
-					}}
-					variant='link'
-				>
+				<Button as={Link} to='/register' variant='link'>
 					Registrarme
 				</Button>
 
-				<Button
-					onClick={() => {
-						handleNavigation('/recoverpass');
-					}}
-					variant='link'
-				>
+				<Button as={Link} to='/recoverpass' variant='link'>
 					Olvidé mi password
 				</Button>
 			</div>

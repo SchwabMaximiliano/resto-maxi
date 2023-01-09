@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles.css';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import Autosuggest from 'react-autosuggest';
@@ -65,12 +65,6 @@ export const RecoverPassForm = () => {
 	};
 	// --
 
-	const navigate = useNavigate();
-
-	const handleNavigation = route => {
-		navigate(route);
-	};
-
 	const onSubmit = async data => {
 		data.email = value;
 		console.log(data);
@@ -87,7 +81,7 @@ export const RecoverPassForm = () => {
 						'success'
 					);
 				} else {
-					Swal.fire('Error!', 'Datos invalidos', 'error');
+					Swal.fire('Error!', 'Email no registrado', 'error');
 				}
 			})
 			.catch(function (error) {
@@ -117,13 +111,8 @@ export const RecoverPassForm = () => {
 					<Button variant='success mt-2' type='submit'>
 						Recuperar
 					</Button>{' '}
-					<Button
-						variant='primary mt-2'
-						onClick={() => {
-							handleNavigation('/');
-						}}
-					>
-						Inicio
+					<Button as={Link} to='/login' variant='primary mt-2'>
+						Atras
 					</Button>
 				</Form>
 			</div>

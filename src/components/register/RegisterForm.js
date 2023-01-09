@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import '../styles.css';
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { REGEX } from '../../settings';
 import { Button, Form } from 'react-bootstrap';
@@ -10,9 +9,10 @@ import { bff } from '../../config';
 import { CustomInput } from '../components/form_group/CustomInput';
 import { EmailSugestInput } from '../components/form_group/EmailSugestInput';
 import { ThreeToggleButtonForm } from '../components/form_group/ThreeToggleButtons';
+import { useNavigate, Link } from 'react-router-dom';
+import { CheckModal } from '../components/form_group/CheckModal';
 
 export const RegisterForm = () => {
-	const navigate = useNavigate();
 	const {
 		register,
 		formState: { errors },
@@ -20,6 +20,10 @@ export const RegisterForm = () => {
 	} = useForm();
 	const [gender, setGender] = useState('');
 	const [value, setValue] = useState('');
+	const navigate = useNavigate();
+	const handleNavigation = route => {
+		navigate(route);
+	};
 
 	const onSubmit = async data => {
 		await axios
@@ -41,7 +45,7 @@ export const RegisterForm = () => {
 					);
 					data.password = '';
 					localStorage.setItem('userData', JSON.stringify(data));
-					navigate('/user');
+					handleNavigation('/login');
 				} else {
 					Swal.fire('Error!', 'Datos invalidos', 'error');
 				}
@@ -138,12 +142,13 @@ export const RegisterForm = () => {
 						errors={errors}
 						register={register}
 					/>
+					<CheckModal />
 					<Button variant='success mt-2' type='submit'>
 						Continuar
 					</Button>{' '}
-					<a href='/'>
-						<Button variant='primary mt-2'>Inicio</Button>
-					</a>
+					<Button as={Link} to='/login' variant='primary mt-2'>
+						Cancelar
+					</Button>
 				</Form>
 			</div>
 		</div>
