@@ -54,10 +54,11 @@ export const NavBar = () => {
 									<Dropdown.Item as={Link} to='/user'>
 										Mi cuenta
 									</Dropdown.Item>
+									<Dropdown.Item as={Link} to='/dashboard'>
+										Reservas
+									</Dropdown.Item>
 									<Dropdown.Divider />
 									<Dropdown.Item
-										as={Link}
-										to='/login'
 										onClick={() => {
 											handleNavigation('/login');
 										}}

@@ -18,55 +18,54 @@ function App() {
 	return (
 		<InitialContext>
 			<BrowserRouter>
+				<NavBar />
 				<Routes>
-					<Route name='navbar' exact path='/' element={<NavBar />}>
-						<Route
-							name='carousel'
-							exact
-							path='/'
-							element={<UncontrolledCarousel />}
-						/>
-						<Route name='home' exact path='home' element={<Home />} />
-						<Route name='login' exact path='login' element={<LoginForm />} />
-						<Route
-							name='register'
-							exact
-							path='register'
-							element={<RegisterForm />}
-						/>
-						<Route
-							name='recoverpass'
-							exact
-							path='recoverpass'
-							element={<RecoverPassForm />}
-						/>
-						<Route
-							name='recoverpass-enterpass'
-							exact
-							path='recoverpass-enterpass/:user'
-							element={<PassForm />}
-						/>
-						<Route name='user' exact path='user' element={<User />} />
-						<Route
-							name='email-confirmed'
-							exact
-							path='/email-confirmed'
-							element={<EmailConfirmed />}
-						/>
-						<Route
-							name='dashboard'
-							exact
-							path='/dashboard'
-							element={<Dashboard />}
-						/>
-						<Route
-							name='email-error'
-							exact
-							path='/email-error'
-							element={<EmailError />}
-						/>
-						<Route name='not-fount' path='*' element={<NotFound />} />
-					</Route>
+					<Route
+						name='carousel'
+						exact
+						path='/'
+						element={<UncontrolledCarousel />}
+					/>
+					<Route name='home' exact path='home' element={<Home />} />
+					<Route name='login' exact path='login' element={<LoginForm />} />
+					<Route
+						name='register'
+						exact
+						path='register'
+						element={<RegisterForm />}
+					/>
+					<Route
+						name='recoverpass'
+						exact
+						path='recoverpass'
+						element={<RecoverPassForm />}
+					/>
+					<Route
+						name='recoverpass-enterpass'
+						exact
+						path='recoverpass-enterpass/:user'
+						element={<PassForm />}
+					/>
+					<Route name='user' exact path='user' element={<User />} />
+					<Route
+						name='email-confirmed'
+						exact
+						path='/email-confirmed'
+						element={<EmailConfirmed />}
+					/>
+					<Route
+						name='dashboard'
+						exact
+						path='/dashboard'
+						element={<Dashboard />}
+					/>
+					<Route
+						name='email-error'
+						exact
+						path='/email-error'
+						element={<EmailError />}
+					/>
+					<Route name='not-fount' path='*' element={<NotFound />} />
 				</Routes>
 			</BrowserRouter>
 		</InitialContext>
