@@ -1,0 +1,96 @@
+@import 'https://unpkg.com/open-props';
+@import 'https://unpkg.com/open-props/normalize.min.css';
+
+.media-scroller {
+	--_spacer: var(--size-3);
+	display: grid;
+	gap: var(--_spacer);
+	grid-auto-flow: column;
+	grid-auto-columns: auto;
+	padding: 10px var(--_spacer) var(--_spacer);
+	overflow-x: auto;
+	overscroll-behavior-inline: contain;
+	width: 80%;
+	background-color: rgb(167, 98, 98);
+	box-shadow: 3px 3px rgba(0, 0, 0, 0.5);
+	border-radius: 5px;
+}
+
+.media-element {
+	display: grid;
+	grid-template-rows: min-content;
+	padding: var(--_spacer);
+	background: var(--surface-2);
+	border-radius: var(--radius-2);
+	box-shadow: var(--shadow-2);
+}
+
+.snaps-inline {
+	scroll-snap-type: inline mandatory;
+	scroll-padding-inline: var(--_spacer, 1rem);
+}
+
+.snaps-inline > * {
+	scroll-snap-align: start;
+}
+
+/* general styling */
+
+.page-footer {
+	padding-top: 10px;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.page-title {
+	font-size: var(--font-size-fluid-3);
+	display: grid;
+	gap: var(--size-3);
+}
+
+.page-subtitle {
+	font-size: 250%;
+	flex-shrink: 1;
+}
+
+.page-carousel-container {
+	background-color: cadetblue;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 50%;
+	margin: 10px auto;
+	border-radius: 50px;
+	box-shadow: 3px 3px rgba(0, 0, 0, 0.5);
+}
+
+.card-carousel-container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding-bottom: 15px;
+	margin-bottom: 10px;
+}
+
+.dashboard-button {
+	box-shadow: 3px 3px rgba(0, 0, 0, 0.5);
+}
+
+/*nueva-reserva*/
+.select-container {
+	margin-bottom: 10px;
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+	height: 200px;
+	border-radius: 10px;
+}
+
+.preconfirmacion-text {
+	text-align: right;
+}
