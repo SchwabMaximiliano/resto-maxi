@@ -11,31 +11,21 @@ export const CardCarousel = props => {
 				{props.reservas.map((reserva, index) => {
 					return (
 						<div className='media-element' key={index}>
-							<p className='media-data'>
-								<b>Canntidad:</b> {reserva.personas} personas
+							<p className='media-data mb-0'>
+								<b>Canntidad de personas:</b>
 							</p>
-							<p className='media-data'>
-								<b>Fecha:</b> {reserva.fecha}
+							<p>{reserva.personas}</p>
+							<p className='media-data mb-0'>
+								<b>Fecha:</b>
 							</p>
-							<p className='media-data'>
-								<b>Hora:</b> {reserva.hora}
+							<p>{reserva.dia}</p>
+							<p className='media-data mb-0'>
+								<b>Hora:</b>
 							</p>
+							<p>{reserva.hora}</p>
 						</div>
 					);
 				})}
-
-				<div className='media-element'>
-					<p className='title'>A longer title here</p>
-				</div>
-				<div className='media-element'>
-					<p className='title'>An even longer title on this one</p>
-				</div>
-				<div className='media-element'>
-					<p className='title'>Ut enim ad minim veniam</p>
-				</div>
-				<div className='media-element'>
-					<p className='title'>Duis aute irure dolor</p>
-				</div>
 			</div>
 		</div>
 	);

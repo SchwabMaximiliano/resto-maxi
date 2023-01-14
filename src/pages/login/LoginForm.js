@@ -3,10 +3,10 @@ import '../styles.css';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { REGEX } from '../../settings';
-// import axios from 'axios';
-// import Swal from 'sweetalert2';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 import JSEncrypt from 'jsencrypt';
-// import { bffresto } from '../../config';
+import { bffresto } from '../../config';
 import { useInitialContext, useUserContext } from '../../helper/InitialContext';
 import { CustomInput } from '../../components/form_group/CustomInput';
 import { useNavigate, Link } from 'react-router-dom';
@@ -32,12 +32,12 @@ export const LoginForm = () => {
 		const passwordEncrypted = encrypt.encrypt(data.password);
 		// eslint-disable-next-line no-unused-vars
 		const encryptedData = { user: userEncrypted, password: passwordEncrypted };
-		data.name = 'nombre1';
+		// data.name = 'nombre1';
 
 		logIn(data);
 		handleNavigation('/dashboard');
 		// post to backend
-		/*
+
 		await axios
 			.post(`${bffresto}/api/user/login`, encryptedData)
 			.then(response => {
@@ -49,14 +49,12 @@ export const LoginForm = () => {
 				}
 				if (response.status === 401) {
 					Swal.fire('Error!', 'Datos invalidos', 'error');
-				} else {
-					Swal.fire('Error!', 'Error de servidor', 'error');
 				}
 			})
 			.catch(function (error) {
+				Swal.fire('Error!', 'Error de servidor', 'error');
 				console.log(error);
 			});
-			*/
 	};
 
 	return (

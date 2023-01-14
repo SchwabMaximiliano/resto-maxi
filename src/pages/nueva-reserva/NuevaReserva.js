@@ -1,11 +1,11 @@
 import React from 'react';
-import { BreadCrum } from '../../components/nueva-reserva/BreadCrum';
+import { BreadCrumb } from '../../components/nueva-reserva/BreadCrumb';
 import { Outlet } from 'react-router-dom';
 
 export const NuevaReserva = () => {
 	return (
 		<div>
-			<BreadCrum />
+			<BreadCrumb />
 			<Outlet />
 		</div>
 	);

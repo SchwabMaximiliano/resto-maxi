@@ -4,16 +4,19 @@ import { ButtonsReserva } from '../../../components/nueva-reserva/ButtonsReserva
 import { SelectDay } from '../../../components/nueva-reserva/SelectDay';
 
 export const ElegirDia = () => {
-	const [dateSelected, setDateSelected] = useState(new Date());
+	const [dateSelected, setDateSelected] = useState(null);
+	let reservaData = null;
+	if (dateSelected !== null) {
+		const dateSelectedString = dateSelected.toLocaleDateString('es-es', {
+			month: 'long',
+			day: 'numeric',
+		});
 
-	const dateSelectedString = dateSelected.toLocaleDateString('es-es', {
-		month: 'long',
-		day: 'numeric',
-	});
-
-	const reservaData = {
-		dia: dateSelectedString,
-	};
+		reservaData = {
+			dia: dateSelectedString,
+			date: dateSelected,
+		};
+	}
 
 	return (
 		<div>

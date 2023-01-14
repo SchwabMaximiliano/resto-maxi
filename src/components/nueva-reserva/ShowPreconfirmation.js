@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const ShowPreconfirmation = ({ reserva }) => {
-	const reservaData = JSON.parse(localStorage.getItem('reservaData'));
-
+export const ShowPreconfirmation = ({ reservaData }) => {
 	return (
 		<div className='select-container bg-white'>
 			<p>
@@ -20,5 +18,5 @@ export const ShowPreconfirmation = ({ reserva }) => {
 };
 
 ShowPreconfirmation.propTypes = {
-	reserva: PropTypes.any,
+	reservaData: PropTypes.any,
 };

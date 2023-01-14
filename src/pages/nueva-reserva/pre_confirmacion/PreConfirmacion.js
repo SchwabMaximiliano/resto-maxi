@@ -4,16 +4,12 @@ import { ButtonsReserva } from '../../../components/nueva-reserva/ButtonsReserva
 import { ShowPreconfirmation } from '../../../components/nueva-reserva/ShowPreconfirmation';
 
 export const PreConfirmacion = () => {
-	const reserva = {
-		dia: 'dasdas',
-		hora: 'asdsda',
-		cantidad_personas: 2,
-	};
+	const reservaData = JSON.parse(localStorage.getItem('reservaData'));
 
 	return (
 		<div>
 			<ContainerReserva title='Vas a Reservar'>
-				<ShowPreconfirmation reserva={reserva} />
+				<ShowPreconfirmation reservaData={reservaData} />
 			</ContainerReserva>
 			<ButtonsReserva leftButtonText='Cancelar' rightButtonText='Reservar' />
 		</div>
