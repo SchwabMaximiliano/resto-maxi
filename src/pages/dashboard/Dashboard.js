@@ -12,7 +12,7 @@ export const Dashboard = () => {
 	const reservasVig = [];
 	const reservasHist = [];
 
-	const [reservas, setReservas] = useState(['']);
+	const [reservas, setReservas] = useState([]);
 	useEffect(() => {
 		axios
 			.get(`${bffresto}/api/reservas/todas`)

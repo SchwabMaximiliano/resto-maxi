@@ -33,15 +33,3 @@ SelectHour.propTypes = {
 	hourSelected: PropTypes.any,
 	setHourSelected: PropTypes.any,
 };
-/*
-<Button className='mb-2' variant='secondary' size='lg'>
-	20:00
-</Button>
-<Button className='mb-2' variant='secondary' size='lg'>
-	21:30
-</Button>
-<Button className='mb-2' variant='secondary' size='lg' disabled>
-	23:00
-</Button>
-
-*/
