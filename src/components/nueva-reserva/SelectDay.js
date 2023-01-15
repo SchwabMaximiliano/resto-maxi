@@ -8,20 +8,26 @@ import es from 'date-fns/locale/es';
 registerLocale('es', es);
 
 export const SelectDay = ({ dateSelected, setDateSelected }) => {
-	/* 	armar una bd de mesas que diga 20: 2 y asi sucesivamente (cantidad personas: cantidad mesas)
-		armar una bd de disponibilidad que tenga dates (fechas)
+	/* 	armar una bd de mesas { cant_pers_nro: 1, cant_pers: UNO:, cant_mesas: 2 } y asi sucesivamente
+		armar una bd de horarios no disponibles { dia: fecha(), hora: '20:00' }
+		armar una bd de dias no disponibles { date() }
+		(ver si conviene setearle 0 y get time en el backend al guardarlos asi no los tengo que recorrer aca)
 		luego de guardar una reserva debemos actualizar la bd de disponibilidad de forma asincrona
-			solo va a haber maximo 3 reservas en cada dia (una en cada horario)
-			buscamos por dia y los que tienen 3 o mas reservas los actualizamos en no disponibles
+			-buscamos por dia, horario y mesa si trae igual o mas reservas que la bd de mesas atributo cant_mesas, 
+			 guardamos en horarios no disponibles { dia: fecha(), hora: '20:00' }
+			-buscamos por dia en horarios no disponibles y los que tienen 3 o mas reservas los actualizamos en dias no disponibles
 		para marcar la disponibilidad de mesas traemos de la bd de mesas un array con todas las key (o sea las mesas que existen)
 		seleccionamos la mesa
-		para marcar los dias no disponibles traemos de la bd los dias no disponibles
+		para marcar los dias no disponibles traemos de la bd los dias no disponibles		
 		seteamos los dias disponibles usando las funciones creadas
 		seleccionamos el dia
-		para marcar las horas no disponibles hacemos una peticion con el dia seleccionado y traemos un array con las horas reservadas
+		para marcar las horas no disponibles hacemos una peticion con el dia seleccionado y traemos un array con las horas reservadas de 
+		la base de datos horarios no disponibles
 		seteamos las horas no disponibles
 		seleccionamos la hora
 		lo deguardar la reserva ya esta hecho, faltaria crear las bd faltantes y actualizarlas tras cada reserva
+
+		en la bd ver como conecto una con la otra
 */
 
 	// van a venir con la hora seteada asi que los debemos recorrer y setear la hora en 0 para comparar
@@ -43,13 +49,6 @@ export const SelectDay = ({ dateSelected, setDateSelected }) => {
 		setCeroHours(addDays(new Date(), 5)).getTime(),
 		setCeroHours(addDays(new Date(), 6)).getTime(),
 		setCeroHours(addDays(new Date(), 7)).getTime(),
-	];
-
-	const diasDisponibles = [
-		{
-			dia: new Date(),
-			reservas: [true, true, true],
-		},
 	];
 
 	return (
