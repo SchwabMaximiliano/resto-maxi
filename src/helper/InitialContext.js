@@ -5,17 +5,12 @@ import PropTypes from 'prop-types';
 
 const initialContext = React.createContext();
 const userContext = React.createContext();
-const reservasContext = React.createContext();
 
 export function useInitialContext() {
 	return useContext(initialContext);
 }
 export function useUserContext() {
 	return useContext(userContext);
-}
-
-export function useReservasContext() {
-	return useContext(reservasContext);
 }
 
 export function InitialContext({ children }) {
@@ -43,53 +38,9 @@ export function InitialContext({ children }) {
 		},
 	};
 
-	// reservas
-	const reservasVig = [
-		{
-			personas: 1,
-			fecha: '23/03/2022',
-			hora: '22:30',
-		},
-		{
-			personas: 2,
-			fecha: '23/03/2022',
-			hora: '22:30',
-		},
-		{
-			personas: 3,
-			fecha: '23/03/2022',
-			hora: '22:30',
-		},
-	];
-	const reservasHist = [
-		{
-			personas: 3,
-			fecha: '23/03/2021',
-			hora: '22:30',
-		},
-		{
-			personas: 2,
-			fecha: '23/03/2021',
-			hora: '22:30',
-		},
-		{
-			personas: 1,
-			fecha: '23/03/2021',
-			hora: '22:30',
-		},
-	];
-	const reservasValue = {
-		reservasVig,
-		reservasHist,
-	};
-
 	return (
 		<initialContext.Provider value={publicKey}>
-			<userContext.Provider value={userValue}>
-				<reservasContext.Provider value={reservasValue}>
-					{children}
-				</reservasContext.Provider>
-			</userContext.Provider>
+			<userContext.Provider value={userValue}>{children}</userContext.Provider>
 		</initialContext.Provider>
 	);
 }
