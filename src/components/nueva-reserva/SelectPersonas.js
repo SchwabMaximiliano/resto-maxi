@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../components.css';
-import { RESERVA_CANTIDAD_PERSONAS } from '../../config';
+import { bffresto } from '../../config';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 export const SelectPersonas = ({ personas, setPersonas }) => {
+	const [mesas, setMesas] = useState([]);
+	useEffect(() => {
+		axios
+			.get(`${bffresto}/api/mesas/todas`)
+			.then(response => setMesas(response.data));
+		console.log(mesas);
+	}, []);
 	return (
 		<div className='select-container'>
 			<select
 				value={personas}
 				onChange={event => setPersonas(event.target.value)}
 			>
-				{RESERVA_CANTIDAD_PERSONAS.map((cantPers, idx) => {
+				{mesas.map((mesa, idx) => {
 					return (
 						<option key={idx} value={idx + 1}>
-							{cantPers}
+							{mesa.personas}
 						</option>
 					);
 				})}

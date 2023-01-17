@@ -20,17 +20,6 @@ export const ButtonsReserva = ({
 	};
 
 	const localData = JSON.parse(localStorage.getItem('reservaData'));
-
-	if (rightButtonText === 'Continuar') {
-		// vuelvo a pasar la fecha a formato Date
-		const dateUpdate = new Date(localData.date);
-		// tomo los datos de la hora seleccionada
-		const hora = parseInt(reservaData.hora?.substr(0, 2));
-		const minutos = parseInt(reservaData.hora?.substr(3, 2));
-		// le seteo la hora seleccionada
-		dateUpdate.setHours(hora, minutos, 0);
-		reservaData.date = dateUpdate;
-	}
 	const MergedData = { ...localData, ...reservaData };
 
 	const navigate = useNavigate();

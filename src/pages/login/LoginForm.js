@@ -33,11 +33,8 @@ export const LoginForm = () => {
 		// eslint-disable-next-line no-unused-vars
 		const encryptedData = { user: userEncrypted, password: passwordEncrypted };
 		// data.name = 'nombre1';
-
 		logIn(data);
-		handleNavigation('/dashboard');
 		// post to backend
-
 		await axios
 			.post(`${bffresto}/api/user/login`, encryptedData)
 			.then(response => {
@@ -49,11 +46,13 @@ export const LoginForm = () => {
 				}
 				if (response.status === 401) {
 					Swal.fire('Error!', 'Datos invalidos', 'error');
+					handleNavigation('/login');
 				}
 			})
 			.catch(function (error) {
 				Swal.fire('Error!', 'Error de servidor', 'error');
 				console.log(error);
+				handleNavigation('/login');
 			});
 	};
 
