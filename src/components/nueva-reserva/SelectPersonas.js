@@ -10,17 +10,17 @@ export const SelectPersonas = ({ personas, setPersonas }) => {
 		axios
 			.get(`${bffresto}/api/mesas/todas`)
 			.then(response => setMesas(response.data));
-		console.log(mesas);
 	}, []);
+	const mesasOrdenadas = mesas.sort((a, b) => a.personas_nro - b.personas_nro);
 	return (
 		<div className='select-container'>
 			<select
 				value={personas}
 				onChange={event => setPersonas(event.target.value)}
 			>
-				{mesas.map((mesa, idx) => {
+				{mesasOrdenadas.map((mesa, idx) => {
 					return (
-						<option key={idx} value={idx + 1}>
+						<option key={idx} value={mesa.personas_nro}>
 							{mesa.personas}
 						</option>
 					);
@@ -31,6 +31,6 @@ export const SelectPersonas = ({ personas, setPersonas }) => {
 };
 
 SelectPersonas.propTypes = {
-	personas: PropTypes.string,
+	personas: PropTypes.number,
 	setPersonas: PropTypes.any,
 };

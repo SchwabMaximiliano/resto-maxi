@@ -4,7 +4,7 @@ import { ContainerReserva } from '../../../components/nueva-reserva/ContainerRes
 import { SelectPersonas } from '../../../components/nueva-reserva/SelectPersonas';
 
 export const CantidadPersonas = () => {
-	const [personas, setPersonas] = useState('1');
+	const [personas, setPersonas] = useState(1);
 
 	const reservaData = {
 		personas,

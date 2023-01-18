@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
-import { RESERVA_HORARIOS } from '../../config';
+import { bffresto } from '../../config';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 export const SelectHour = ({ hourSelected, setHourSelected }) => {
-	const hourDisabled = '23:00';
+	const [horarios, setHorarios] = useState([]);
+	const [hourDisabled, setHourDisabled] = useState([]);
+
+	const reserva = JSON.parse(localStorage.getItem('reservaData'));
+
+	useEffect(() => {
+		axios
+			.get(`${bffresto}/api/horarios/todos/${reserva.date}/${reserva.personas}`)
+			.then(response => {
+				setHorarios(response.data.horarios);
+				setHourDisabled(response.data.horarios_no_disponibles);
+			});
+	}, []);
+
 	return (
 		<div className='select-container'>
 			<ButtonGroup className='select-container'>
-				{RESERVA_HORARIOS.map((hour, idx) => (
+				{horarios.map((hour, idx) => (
 					<ToggleButton
 						className='mb-2'
 						key={idx}
@@ -17,12 +31,12 @@ export const SelectHour = ({ hourSelected, setHourSelected }) => {
 						type='radio'
 						variant='secondary'
 						name='hour'
-						value={hour.value}
-						checked={hourSelected === hour.value}
+						value={hour.nombre}
+						checked={hourSelected === hour.nombre}
 						onChange={e => setHourSelected(e.currentTarget.value)}
-						disabled={hour.value === hourDisabled}
+						disabled={hourDisabled.indexOf(hour.nombre) !== -1}
 					>
-						{hour.name}
+						{hour.nombre}
 					</ToggleButton>
 				))}
 			</ButtonGroup>
