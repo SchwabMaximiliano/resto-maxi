@@ -10,24 +10,6 @@ import { bffresto } from '../../config';
 registerLocale('es', es);
 
 export const SelectDay = ({ dateSelected, setDateSelected }) => {
-	/* 		
-		para marcar la disponibilidad de mesas traemos de la bd de mesas un array con todas las key (o sea las mesas que existen)
-		seleccionamos la mesa
-		para marcar los dias no disponibles buscamos en la bd de dias no disponibles por mesa seleccionada y los que tienen 3 o mas reservas
-		(mandamos un array con los dias al front)
-		seteamos los dias disponibles usando las funciones creadas
-		seleccionamos el dia
-		para marcar las horas no disponibles hacemos una peticion con el dia y la mesa selecionada y traemos un array con las horas 
-		reservadas de la base de datos horarios no disponibles
-		seteamos las horas no disponibles
-		seleccionamos la hora
-		
-		cuando pasa a historico se quita de reservas y si estaba en no disponibles tambien, 
-		hay que verificar en todas las bd si hay que quitarlo
-		ver que onda lo de actualizar bd asincrono
-		
-*/
-
 	const [diasNoDisponibles, setDiasNoDisponibles] = useState();
 	const reserva = JSON.parse(localStorage.getItem('reservaData'));
 
@@ -46,8 +28,7 @@ export const SelectDay = ({ dateSelected, setDateSelected }) => {
 		date.setDate(date.getDate() - days);
 		return date;
 	};
-	*/
-
+*/
 	const filter = date => {
 		return !diasNoDisponibles?.includes(date.getTime());
 	};

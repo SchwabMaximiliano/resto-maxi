@@ -32,16 +32,12 @@ export const LoginForm = () => {
 		const passwordEncrypted = encrypt.encrypt(data.password);
 		// eslint-disable-next-line no-unused-vars
 		const encryptedData = { user: userEncrypted, password: passwordEncrypted };
-		// data.name = 'nombre1';
-		logIn(data);
 		// post to backend
 		await axios
 			.post(`${bffresto}/api/user/login`, encryptedData)
 			.then(response => {
-				console.log(response.status);
 				if (response.status === 200) {
-					console.log(response);
-					localStorage.setItem('userData', JSON.stringify(response.data));
+					logIn(response.data);
 					handleNavigation('/dashboard');
 				}
 				if (response.status === 401) {

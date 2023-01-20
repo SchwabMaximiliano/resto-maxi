@@ -10,11 +10,12 @@ import { bffresto } from '../../config';
 export const Dashboard = () => {
 	const { user } = useUserContext();
 	const [reservas, setReservas] = useState([]);
-	useEffect(() => {
-		axios
-			.get(`${bffresto}/api/reservas/todas/${user._id}`)
-			.then(response => setReservas(response.data));
-	}, []);
+	user &&
+		useEffect(() => {
+			axios
+				.get(`${bffresto}/api/reservas/todas/${user._id}`)
+				.then(response => setReservas(response.data));
+		}, []);
 
 	return (
 		<div>

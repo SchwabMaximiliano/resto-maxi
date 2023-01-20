@@ -18,7 +18,7 @@ export const RegisterForm = () => {
 		formState: { errors },
 		handleSubmit,
 	} = useForm();
-	const [gender, setGender] = useState('');
+	const [gender, setGender] = useState('Masculino');
 	const [value, setValue] = useState('');
 	const navigate = useNavigate();
 	const handleNavigation = route => {
