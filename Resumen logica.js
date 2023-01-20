@@ -22,11 +22,4 @@ Ejecuto a cierta hora un comando que cambia el estado de las reservas (active: t
 con la misma herramienta enviar un email 2 dias antes de la reserva (CRON)
 cuando cambia el estado a false se quita de reservas y si estaba en no disponibles tambien, 
 hay que verificar en todas las bd si hay que quitarlo
-ver que onda lo de actualizar bd asincrono
-*/
-
-/*
-cosas por hacer
-acomodar el dashboard para que se vea mejor las reservas
-ver porque carga tantas veces todo, esta bien que renderice asi?
 */
