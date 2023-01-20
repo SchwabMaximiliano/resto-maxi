@@ -25,10 +25,15 @@ export const ButtonsReserva = ({
 	const navigate = useNavigate();
 	const saveReserva = async data => {
 		const userId = JSON.parse(localStorage.getItem('userData'))._id;
+		// seteo la hora seleccionada a la fecha de la reserva
+		const hour = parseInt(data.hora.substring(0, 3), 10);
+		const min = parseInt(data.hora.substring(3, 5), 10);
+		data.date = new Date(data.date).setHours(hour, min, 0, 0);
 		await axios
 			.post(`${bffresto}/api/reservas/nueva-reserva`, {
 				...data,
 				userId,
+				active: true,
 			})
 			.then(response => {
 				console.log(response.status);

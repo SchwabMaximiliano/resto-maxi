@@ -9,24 +9,12 @@ import { bffresto } from '../../config';
 
 export const Dashboard = () => {
 	const { user } = useUserContext();
-	const reservasVig = [];
-	const reservasHist = [];
-
 	const [reservas, setReservas] = useState([]);
 	useEffect(() => {
 		axios
-			.get(`${bffresto}/api/reservas/todas`)
+			.get(`${bffresto}/api/reservas/todas/${user._id}`)
 			.then(response => setReservas(response.data));
 	}, []);
-
-	const fechaActual = new Date();
-
-	reservas.map(reserva => {
-		const fechaReserva = new Date(reserva.date);
-		return fechaReserva < fechaActual
-			? reservasHist.push(reserva)
-			: reservasVig.push(reserva);
-	});
 
 	return (
 		<div>
@@ -34,8 +22,11 @@ export const Dashboard = () => {
 				<p className='page-subtitle'>
 					<b>Bienvenido {user.name}</b>
 				</p>
-				<CardCarousel title='Reservas vigentes' reservas={reservasVig} />
-				<CardCarousel title='Historial de reservas' reservas={reservasHist} />
+				<CardCarousel title='Reservas vigentes' reservas={reservas.vigentes} />
+				<CardCarousel
+					title='Historial de reservas'
+					reservas={reservas.historicas}
+				/>
 			</div>
 			<footer className='page-footer'>
 				<Button

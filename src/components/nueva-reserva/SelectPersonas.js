@@ -16,7 +16,7 @@ export const SelectPersonas = ({ personas, setPersonas }) => {
 		<div className='select-container'>
 			<select
 				value={personas}
-				onChange={event => setPersonas(event.target.value)}
+				onChange={event => setPersonas(parseInt(event.target.value))}
 			>
 				{mesasOrdenadas.map((mesa, idx) => {
 					return (

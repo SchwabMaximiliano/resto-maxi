@@ -8,7 +8,7 @@ export const CardCarousel = props => {
 			<h2 className='section-title'>{props.title}</h2>
 
 			<div className='media-scroller snaps-inline'>
-				{props.reservas.map((reserva, index) => {
+				{props.reservas?.map((reserva, index) => {
 					return (
 						<div className='media-element' key={index}>
 							<p className='media-data mb-0'>
