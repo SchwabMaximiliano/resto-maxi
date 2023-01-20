@@ -67,8 +67,6 @@ export const RecoverPassForm = () => {
 
 	const onSubmit = async data => {
 		data.email = value;
-		console.log(data);
-
 		await axios
 			.post(`${bffresto}/api/user/recover-pass`, data)
 			.then(response => {
